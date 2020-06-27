@@ -23,16 +23,16 @@ https://ru.mouser.com/Passive-Components/Capacitors/Ceramic-Capacitors/_/N-5g8m
 Проект должен в себя включать:
 - Docker compose для запуска Mongo
 - Инструкции по запуску в README.md:
-
-
+#### Python3 и Docker должны уже быть установлены
 ### Установка и запуск приложения 
 git clone https://github.com/satoshiking/capacitors.git<br/>
 cd capacitors<br/>
 python3 -m venv venv<br/>
 source venv/bin/activate<br/>
 pip install -r requirements.txt<br/>
-docker-compose up -d 
-scrapy crawl capacitors
+docker-compose up -d <br/>
+scrapy crawl capacitors<br/>
+
 
 ### После завершения работы
 docker-compose down
