@@ -26,7 +26,7 @@ https://ru.mouser.com/Passive-Components/Capacitors/Ceramic-Capacitors/_/N-5g8m
 
 
 ### Установка и запуск приложения 
-git clone http://github.com/satoshiking/capacitors.git<br/>
+git clone https://github.com/satoshiking/capacitors.git<br/>
 cd capacitors<br/>
 python3 -m venv venv<br/>
 source venv/bin/activate<br/>
@@ -35,4 +35,4 @@ docker-compose up -d
 scrapy crawl capacitors
 
 ### После завершения работы
-docker-compose stop
+docker-compose down
