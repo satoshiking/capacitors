@@ -30,9 +30,9 @@ cd capacitors<br/>
 python3 -m venv venv<br/>
 source venv/bin/activate<br/>
 pip install -r requirements.txt<br/>
-docker-compose up -d <br/>
+sudo docker-compose up -d <br/>
 scrapy crawl capacitors<br/>
 
 
 ### После завершения работы
-docker-compose down
+suod docker-compose down

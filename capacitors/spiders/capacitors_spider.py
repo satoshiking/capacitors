@@ -36,7 +36,8 @@ class CapasitorSpider(scrapy.Spider):
             'https://ru.mouser.com/Passive-Components/Capacitors/Ceramic-Capacitors/_/N-5g8m'
         ]
         for url in urls:
-            yield scrapy.Request(url=url, callback=self.parse, method='POST')
+            yield scrapy.Request(url=url, callback=self.parse, method='POST', meta={'dont_redirect': True,
+                                                                                    'handle_httpstatus_list': [302]})
 
     def parse(self, response):
         filename = 'capacitor_{time}.html'.format(time=str(time.time()))
@@ -75,7 +76,8 @@ class CapasitorSpider(scrapy.Spider):
                 random_page = randint(1, self.pages_total - 1)
                 url_random_page = "?No={}".format(random_page * 25)
                 self.log("NEXT RANDOM PAGE URL = %s" % url_random_page)
-                yield response.follow(url_random_page, callback=self.parse)
+                yield response.follow(url_random_page, callback=self.parse, meta={'dont_redirect': True,
+                                                                                  'handle_httpstatus_list': [302]})
             else:
                 self.show_results()
         else:
