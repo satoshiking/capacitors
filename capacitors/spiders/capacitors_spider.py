@@ -7,8 +7,6 @@ from pymongo import MongoClient
 
 class CapasitorSpider(scrapy.Spider):
     name = "capacitors"
-    download_delay = 2
-    rotate_user_agent = True
 
     def __init__(self):
         super(CapasitorSpider).__init__()
@@ -36,14 +34,16 @@ class CapasitorSpider(scrapy.Spider):
             'https://ru.mouser.com/Passive-Components/Capacitors/Ceramic-Capacitors/_/N-5g8m'
         ]
         for url in urls:
-            yield scrapy.Request(url=url, callback=self.parse, method='POST', meta={'dont_redirect': True,
-                                                                                    'handle_httpstatus_list': [302]})
+            yield scrapy.Request(url=url, callback=self.parse, method='GET')
 
-    def parse(self, response):
+    def write_response(self, response):
         filename = 'capacitor_{time}.html'.format(time=str(time.time()))
         with open(filename, 'wb') as f:
             f.write(response.body)
         self.log('Saved file %s' % filename)
+
+    def parse(self, response):
+        # self.write_response(response)
 
         capacitors = response.xpath('/html/body/main/div/div/div[1]/div[6]/div/form/div[2]/div[2]/table/tbody/tr')
 
@@ -76,8 +76,7 @@ class CapasitorSpider(scrapy.Spider):
                 random_page = randint(1, self.pages_total - 1)
                 url_random_page = "?No={}".format(random_page * 25)
                 self.log("NEXT RANDOM PAGE URL = %s" % url_random_page)
-                yield response.follow(url_random_page, callback=self.parse, meta={'dont_redirect': True,
-                                                                                  'handle_httpstatus_list': [302]})
+                yield response.follow(url_random_page, callback=self.parse)
             else:
                 self.show_results()
         else:
@@ -99,6 +98,7 @@ class CapasitorSpider(scrapy.Spider):
                     self.capacitor_params_collection.update_one(my_filter, {"$set": param}, upsert=True)
 
     def show_results(self):
+        print("------------------- RUSULTS --------------------")
         count = 0
         for document in self.capacitor_collection.find({}):
             print(document)
@@ -110,5 +110,5 @@ class CapasitorSpider(scrapy.Spider):
         for document in self.capacitor_params_collection.find({}):
             print(document)
             count += 1
-        self.log("Capacitors have %d parametres" % count)
-        print("Capacitors have %d parametres" % count)
+        self.log("%d parametres found in mongoDB" % count)
+        print("%d parametres found in mongoDB" % count)

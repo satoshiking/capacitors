@@ -23,16 +23,23 @@ https://ru.mouser.com/Passive-Components/Capacitors/Ceramic-Capacitors/_/N-5g8m
 Проект должен в себя включать:
 - Docker compose для запуска Mongo
 - Инструкции по запуску в README.md:
-#### Python3 и Docker должны уже быть установлены
-### Установка и запуск приложения 
-git clone https://github.com/satoshiking/capacitors.git<br/>
-cd capacitors<br/>
-python3 -m venv venv<br/>
-source venv/bin/activate<br/>
-pip install -r requirements.txt<br/>
-sudo docker-compose up -d <br/>
-scrapy crawl capacitors<br/>
+#### Для работы скрипта должны быть установлены Python3 и Docker 
+### Установка
+- git clone https://github.com/satoshiking/capacitors.git<br/>
+- cd capacitors<br/>
+- python3 -m venv venv<br/>
+- source venv/bin/activate<br/>
+- pip install -r requirements.txt<br/>
+- sudo docker-compose up -d <br/>
+- В файле capacitors/settings.py находим строчку: "CRAWLERA_APIKEY = ''"<br>
+и вписываем туда ключ от сервиса crawlera*  https://app.scrapinghub.com/ <br/>
 
+________________________________________
+* сервис crawlera необходим для обхода ПО "Distil Networks" установленного на сайте по блокированию ботов и средств автоматизации. 
+
+### Запуск приложения
+"scrapy crawl capacitors" - для общего запуска приложения <br/>
+"python results.py" - только вывод сохранненной информации из mongoDB <br/>
 
 ### После завершения работы
-suod docker-compose down
+sudo docker-compose down
