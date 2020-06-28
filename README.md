@@ -35,7 +35,7 @@ https://ru.mouser.com/Passive-Components/Capacitors/Ceramic-Capacitors/_/N-5g8m
 и вписываем туда ключ от сервиса crawlera*  https://app.scrapinghub.com/ <br/>
 
 ________________________________________
-* сервис crawlera необходим для обхода ПО "Distil Networks" установленного на сайте по блокированию ботов и средств автоматизации. 
+*сервис crawlera необходим для обхода ПО "Distil Networks" установленного на сайте по блокированию ботов и средств автоматизации. 
 
 ### Запуск приложения
 "scrapy crawl capacitors" - для общего запуска приложения <br/>
