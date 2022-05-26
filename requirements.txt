@@ -42,7 +42,7 @@ scrapy-proxies==0.4
 service-identity==18.1.0
 six==1.15.0
 texttable==1.6.2
-Twisted==20.3.0
+Twisted==22.4.0
 urllib3==1.25.9
 w3lib==1.22.0
 websocket-client==0.57.0
